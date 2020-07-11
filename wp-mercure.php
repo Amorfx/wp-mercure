@@ -30,5 +30,9 @@ class WpMercure {
     public static function getConf() {
         return include __DIR__ . '/config/configuration.php';
     }
+
+    public static function saveConfig(string $fileName, array $config) {
+        return file_put_contents(__DIR__ . '/config/' . $fileName . '.php', "<?php \n return " . var_export($config, true) . ';');
+    }
 }
 WpMercure::init();
