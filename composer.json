@@ -1,0 +1,18 @@
+{
+    "name": "clementdecou/wp-mercure",
+    "description": "WordPress Integration of Mercure protocol",
+    "authors": [
+        {
+            "name": "Clément Décou",
+            "email": "clement.decou.pro@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WpMercure\\": ""
+        }
+    },
+    "require": {
+        "symfony/mercure": "^0.4.0"
+    }
+}
