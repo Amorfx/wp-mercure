@@ -1,6 +1,6 @@
 <?php
 namespace WpMercure;
-use WpMercure\Functionnalities\Live;
+use WpMercure\Features\LivePost;
 
 /**
  * Enqueue scripts for features (live for example)
@@ -8,20 +8,21 @@ use WpMercure\Functionnalities\Live;
  */
 class WpMercureFront {
     private $config;
-    private $functionnalities;
 
     public function __construct($conf) {
         $this->config = $conf;
-        $this->functionnalities = [Live::class];
-        $this->initFunctionnalities();
+        add_action('wpmercure_localize_scripts_configurations', [$this, 'localizeScript'], 10, 2);
     }
 
-    public function initFunctionnalities() {
-        foreach ($this->functionnalities as $aClass) {
-            if (apply_filters('wpmercure_allow_' . $aClass::FILTER_ID, true)) {
-                new $aClass();
-            }
-        }
+    /**
+     * Add in javascript the wpmercure variables configuration
+     *
+     * @param $handle
+     * @param array $otherConfigurations
+     */
+    public function localizeScript($handle, array $otherConfigurations = []) {
+        $conf = array_merge(['HUB_PUBLIC_URL' => $this->config['HUB_PUBLIC_URL']], $otherConfigurations);
+        wp_localize_script( $handle, 'wpmercure', $conf);
     }
 
     public function enqueueScripts() {

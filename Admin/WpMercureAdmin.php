@@ -21,17 +21,17 @@ class WpMercureAdmin {
 
         add_submenu_page(
             'wpmercure-admin',
-            __('Functionalities', 'wpmercure'),
-            __('Functionalities', 'wpmercure'),
+            __('Features', 'wpmercure'),
+            __('Features', 'wpmercure'),
             'manage_options',
-            'wpmercure-functions',
+            'wpmercure-features',
             [$this, 'renderMenuFunctions']
         );
     }
 
     public function renderMenu() {
         $save = false;
-        if (array_key_exists('page', $_POST)) {
+        if (array_key_exists('page', $_POST) && wp_verify_nonce($_POST['_wpnonce'], 'wpmercure-admin')) {
             $hubUrl = '';
             if (!empty($_POST['hub-url-back'])) {
                 $hubUrl = htmlentities($_POST['hub-url-back']);
@@ -104,6 +104,58 @@ class WpMercureAdmin {
     }
 
     public function renderMenuFunctions() {
+        $config = WpMercure::getConf('features');
+        $save = false;
+        if (array_key_exists('page', $_POST) && wp_verify_nonce($_POST['_wpnonce'], 'wpmercure-features')) {
+            $livePost = false;
+            $liveTaxonomies = false;
 
+            if (array_key_exists('live-post', $_POST) && $_POST['live-post'] === 'on') {
+                $livePost = true;
+            }
+
+            if (array_key_exists('live-taxonomies', $_POST) && $_POST['live-taxonomies'] === 'on') {
+                $liveTaxonomies = true;
+            }
+
+            $config = ['LIVE_POST' => $livePost, 'LIVE_TAXONOMIES' => $liveTaxonomies];
+            $save = WpMercure::saveConfig('features', $config);
+        }
+
+        if ($save) {
+            ?>
+            <div class="notice notice-success is-dismissible">
+                <p><?php _e( 'Configurations saved', 'wpmercure' ); ?></p>
+            </div>
+            <?php
+        }
+?>
+        <h1><?= __('Plugin features', 'wpmercure') ?></h1>
+        <form method="post">
+            <input type="hidden" name="page" value="wpmercure-functions">
+            <?php wp_nonce_field( 'wpmercure-features' ); ?>
+            <table class="form-table">
+                <tbody>
+                <tr>
+                    <th scope="row">
+                        <label for="live-post">
+                            <?= __('Live post', 'wpmercure') ?>
+                        </label>
+                    </th>
+                    <td><input type="checkbox" name="live-post" id="live-post" <?= ($config['LIVE_POST'] === true) ? 'checked' : '' ?>></td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="live-taxonomies">
+                            <?= __('Live taxonomy pages', 'wpmercure') ?>
+                        </label>
+                    </th>
+                    <td><input type="checkbox" name="live-taxonomies" id="live-taxonomies" <?= ($config['LIVE_TAXONOMIES'] === true) ? 'checked' : '' ?>></td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?= __('Save') ?>"></p>
+        </form>
+<?php
     }
 }
