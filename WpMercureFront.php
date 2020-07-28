@@ -12,6 +12,7 @@ class WpMercureFront {
     public function __construct($conf) {
         $this->config = $conf;
         add_action('wpmercure_localize_scripts_configurations', [$this, 'localizeScript'], 10, 2);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
     }
 
     /**

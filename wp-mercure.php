@@ -8,6 +8,9 @@ Version: 0.1
 */
 namespace WpMercure;
 
+use Symfony\Component\Mercure\Jwt\StaticJwtProvider;
+use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Update;
 use WpMercure\Admin\WpMercureAdmin;
 use WpMercure\Features\LivePost;
 
@@ -17,10 +20,12 @@ class WpMercure {
     static $configurations;
     static $featuresConfig;
     static $featuresClass;
+    static $publisher;
 
     public static function init() {
         self::$configurations = false;
         self::$featuresConfig = false;
+        self::$publisher = false;
 
         if (is_admin()) {
             new WpMercureAdmin();
@@ -71,6 +76,31 @@ class WpMercure {
 
     public static function saveConfig(string $fileName, array $config) {
         return file_put_contents(__DIR__ . '/config/' . $fileName . '.php', "<?php \n return " . var_export($config, true) . ';');
+    }
+
+    /**
+     * @return Publisher
+     */
+    private static function getPublisher() {
+        if (self::$publisher !== false) {
+            return self::$publisher;
+        }
+        $configuration = self::getConf();
+        self::$publisher = new Publisher($configuration['HUB_URL'], new StaticJwtProvider($configuration['JWT']));
+
+        return self::$publisher;
+    }
+
+    /**
+     * Send message to a specific topic
+     * @param $topic
+     * @param $data
+     *
+     * @return string
+     */
+    public static function sendMessage($topic, string $data) {
+        $publisher = self::getPublisher();
+        return $publisher(new Update($topic, $data));
     }
 }
 WpMercure::init();
