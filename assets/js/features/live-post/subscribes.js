@@ -45,7 +45,6 @@ const NotificationBubble = {
 // The callback will be called every time an update is published (or click in send notification button)
 eventSource.onmessage = e => {
   const data = JSON.parse(e.data);
-  console.log(data);
   NotificationBubble.createNotification(data);
 }
 
