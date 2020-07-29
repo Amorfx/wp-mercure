@@ -109,6 +109,7 @@ class WpMercureAdmin {
         if (array_key_exists('page', $_POST) && wp_verify_nonce($_POST['_wpnonce'], 'wpmercure-features')) {
             $livePost = false;
             $liveTaxonomies = false;
+            $selectorLivePost = '';
 
             if (array_key_exists('live-post', $_POST) && $_POST['live-post'] === 'on') {
                 $livePost = true;
@@ -118,7 +119,11 @@ class WpMercureAdmin {
                 $liveTaxonomies = true;
             }
 
-            $config = ['LIVE_POST' => $livePost, 'LIVE_TAXONOMIES' => $liveTaxonomies];
+            if (array_key_exists('selector-live-post', $_POST)) {
+                $selectorLivePost = htmlentities($_POST['selector-live-post']);
+            }
+
+            $config = ['LIVE_POST' => $livePost, 'LIVE_TAXONOMIES' => $liveTaxonomies, 'SELECTOR_LIVE_POST' => $selectorLivePost];
             $save = WpMercure::saveConfig('features', $config);
         }
 
@@ -145,6 +150,14 @@ class WpMercureAdmin {
                     <td><input type="checkbox" name="live-post" id="live-post" <?= ($config['LIVE_POST'] === true) ? 'checked' : '' ?>></td>
                 </tr>
                 <tr>
+                    <th scope="row">
+                        <label for="live-post">
+                            <?= __('CSS Selector update live post', 'wpmercure') ?>
+                        </label>
+                    </th>
+                    <td><input type="text" placeholder="Ex: .entry-content" name="selector-live-post" id="selector-live-post" value="<?= $config['SELECTOR_LIVE_POST'] ?>"></td>
+                </tr>
+                <tr style="display: none">
                     <th scope="row">
                         <label for="live-taxonomies">
                             <?= __('Live taxonomy pages', 'wpmercure') ?>

@@ -29,12 +29,11 @@ class WpMercure {
 
         if (is_admin()) {
             new WpMercureAdmin();
-        } else {
-            new WpMercureFront(array_merge(self::getConf(), self::getConf('features')));
         }
 
         self::$featuresClass = apply_filters('wpmercure_features_array', [LivePost::class]);
         self::initFunctionnalities();
+        add_action('wpmercure_send_message_post_update', 'WpMercure\WpMercure::sendPostUpdateMessage');
     }
 
     public static function initFunctionnalities() {
@@ -87,7 +86,6 @@ class WpMercure {
         }
         $configuration = self::getConf();
         self::$publisher = new Publisher($configuration['HUB_URL'], new StaticJwtProvider($configuration['JWT']));
-
         return self::$publisher;
     }
 
@@ -100,7 +98,29 @@ class WpMercure {
      */
     public static function sendMessage($topic, string $data) {
         $publisher = self::getPublisher();
-        return $publisher(new Update($topic, $data));
+        try {
+            $publisher(new Update($topic, $data));
+        } catch (\Exception $e) {
+            var_dump($e->getMessage()); die;
+        }
+    }
+
+    /**
+     * Function of wpmercure_send_message_post_update action
+     *
+     * @param $postID
+     * @param string $message
+     */
+    public static function sendPostUpdateMessage($postID, $message = '') {
+        if (empty($message)) {
+            $message = __('This post has been updated, click to reload post.', 'wpmercure');
+        }
+        $data = [
+            'post_content' => apply_filters('the_content',get_the_content(null, false, $postID)),
+            'message' => $message,
+            'selector' => '',
+        ];
+        WpMercure::sendMessage(get_permalink($postID), json_encode($data));
     }
 }
 WpMercure::init();
