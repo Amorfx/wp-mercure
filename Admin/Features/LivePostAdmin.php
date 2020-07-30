@@ -6,6 +6,7 @@ use WpMercure\WpMercure;
 /**
  * Add box in admin for live post features
  * @package WpMercure\Admin\Features
+ * @since 0.1
  */
 class LivePostAdmin {
     public function init() {

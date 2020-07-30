@@ -4,12 +4,22 @@ namespace WpMercure\Admin;
 
 use WpMercure\WpMercure;
 
+/**
+ * Class WpMercureAdmin
+ * Manage plugin admin menu
+ * @package WpMercure\Admin
+ * @since 0.1
+ */
 class WpMercureAdmin {
     public function __construct() {
         add_action( 'admin_menu', [$this, 'addMenuPage']);
     }
 
     public function addMenuPage() {
+        if (apply_filters('wpmercure_disable_menu_page', false)) {
+            return;
+        }
+
         $mainPage = add_menu_page(
             __( 'Mercure', 'wpmercure' ),
             'Mercure',

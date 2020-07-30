@@ -16,6 +16,13 @@ use WpMercure\Features\LivePost;
 
 require __DIR__ . '/vendor/autoload.php';
 
+/**
+ * Class WpMercure
+ * Main class of the plugin
+ * Manage features
+ * @package WpMercure
+ * @since 0.1
+ */
 class WpMercure {
     static $configurations;
     static $featuresConfig;
@@ -99,9 +106,10 @@ class WpMercure {
     public static function sendMessage($topic, string $data) {
         $publisher = self::getPublisher();
         try {
-            $publisher(new Update($topic, $data));
+            return $publisher(new Update($topic, $data));
         } catch (\Exception $e) {
-            var_dump($e->getMessage()); die;
+            error_log($e->getMessage());
+            return 0;
         }
     }
 

@@ -2,6 +2,14 @@
 
 namespace WpMercure\Admin\Features;
 
+/**
+ * Class LivePostApi
+ * Add endpoint to WordPress REST API for Gutenberg user
+ * TODO change to hook after save post when Gutenberg will be better
+ *
+ * @package WpMercure\Admin\Features
+ * @since 0.1
+ */
 class LivePostApi {
     public function __construct() {
         add_action( 'rest_api_init', function () {
