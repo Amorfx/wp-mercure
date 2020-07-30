@@ -5,6 +5,8 @@ Description: WordPress integration of Mercure protocol
 Author: Clément Décou
 Author URI: https://www.clement-decou.fr
 Version: 0.1
+Text Domain: wpmercure
+Domain Path: /languages
 */
 namespace WpMercure;
 
@@ -41,6 +43,9 @@ class WpMercure {
         self::$featuresClass = apply_filters('wpmercure_features_array', [LivePost::class]);
         self::initFunctionnalities();
         add_action('wpmercure_send_message_post_update', 'WpMercure\WpMercure::sendPostUpdateMessage');
+
+        // Languages
+        add_action( 'plugins_loaded', 'WpMercure\WpMercure::loadLangFile' );
     }
 
     public static function initFunctionnalities() {
@@ -129,6 +134,10 @@ class WpMercure {
             'selector' => '',
         ];
         WpMercure::sendMessage(get_permalink($postID), json_encode($data));
+    }
+
+    public static function loadLangFile() {
+        load_plugin_textdomain( 'wpmercure', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
     }
 }
 WpMercure::init();
