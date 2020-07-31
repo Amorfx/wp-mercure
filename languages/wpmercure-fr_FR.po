@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WP Mercure\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-30 12:21+0000\n"
-"PO-Revision-Date: 2020-07-30 12:27+0000\n"
+"PO-Revision-Date: 2020-07-31 10:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -71,8 +71,10 @@ msgid "This post has been updated, click to reload post."
 msgstr "L'article a été mis à jour, cliquez pour charger ces modifications"
 
 #. Description of the plugin
-msgid "WordPress integration of Mercure protocol"
-msgstr "Intégration de Mercure dans WordPress"
+msgid "WordPress integration of Mercure protocol. Permit realtime update post."
+msgstr ""
+"Intégration de Mercure dans WordPress. Permet la mise à jour en temps réel "
+"d'un article en cours de lecture."
 
 #. Name of the plugin
 msgid "WP Mercure"

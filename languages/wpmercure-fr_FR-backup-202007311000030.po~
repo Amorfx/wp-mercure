@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WP Mercure\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-30 12:21+0000\n"
-"PO-Revision-Date: 2020-07-30 12:25+0000\n"
+"PO-Revision-Date: 2020-07-30 12:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #. Author of the plugin
 msgid "Clément Décou"
-msgstr ""
+msgstr "Clément Décou"
 
 #: Admin/WpMercureAdmin.php:74 Admin/WpMercureAdmin.php:143
 msgid "Configurations saved"
@@ -32,7 +32,7 @@ msgstr "Fonctionnalités"
 
 #. Author URI of the plugin
 msgid "https://www.clement-decou.fr"
-msgstr ""
+msgstr "https://www.clement-decou.fr"
 
 #: Admin/WpMercureAdmin.php:96
 msgid "Hub url for client"
@@ -44,7 +44,7 @@ msgstr "HUB url serveur"
 
 #: Admin/WpMercureAdmin.php:104
 msgid "JWT token"
-msgstr ""
+msgstr "Token JWT"
 
 #: Admin/WpMercureAdmin.php:157
 msgid "Live post"
@@ -52,11 +52,11 @@ msgstr "Article en Direct"
 
 #: Admin/WpMercureAdmin.php:173
 msgid "Live taxonomy pages"
-msgstr ""
+msgstr "Mise à jour page taxonomies"
 
 #: Admin/WpMercureAdmin.php:24
 msgid "Mercure"
-msgstr ""
+msgstr "Mercure"
 
 #: Admin/WpMercureAdmin.php:148
 msgid "Plugin features"
@@ -71,9 +71,9 @@ msgid "This post has been updated, click to reload post."
 msgstr "L'article a été mis à jour, cliquez pour charger ces modifications"
 
 #. Description of the plugin
-msgid "WordPress integration of Mercure protocol"
-msgstr ""
+msgid "WordPress integration of Mercure protocol. Permit realtime update post."
+msgstr "Intégration de Mercure dans WordPress. Permet la mise à jour en temps réel d'un article en cours de lecture."
 
 #. Name of the plugin
 msgid "WP Mercure"
-msgstr ""
+msgstr "WP Mercure"

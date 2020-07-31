@@ -72,7 +72,7 @@ msgid "This post has been updated, click to reload post."
 msgstr ""
 
 #. Description of the plugin
-msgid "WordPress integration of Mercure protocol"
+msgid "WordPress integration of Mercure protocol. Permit realtime update post."
 msgstr ""
 
 #. Name of the plugin

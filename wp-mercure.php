@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Mercure
-Description: WordPress integration of Mercure protocol
+Description: WordPress integration of Mercure protocol. Permit realtime update post.
 Author: Clément Décou
 Author URI: https://www.clement-decou.fr
 Version: 0.1
