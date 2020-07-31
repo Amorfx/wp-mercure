@@ -6,7 +6,7 @@ Requires at least: 4.9
 Tested up to: 5.4.2
 Requires PHP: 7.1.3
 Stable tag: 0.1
-License: GPL
+License: GPLv2
 
 Add WordPress integration of Mercure protocol and add realtime post modification.
 
