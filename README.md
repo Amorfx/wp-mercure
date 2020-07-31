@@ -25,14 +25,15 @@ In your WordPress script use localize script to inject configuration into the sc
 
 After that use EventSource to listen events
 
-`const url = new URL(wpmercure.HUB_PUBLIC_URL);
-url.searchParams.append('topic', yourTopic);
-const eventSource = new EventSource(url);
- 
-eventSource.onmessage = e => {
-  const data = JSON.parse(e.data);
-  // do what you want
-}`
+`
+    const url = new URL(wpmercure.HUB_PUBLIC_URL);
+    url.searchParams.append('topic', yourTopic);
+    const eventSource = new EventSource(url); 
+    eventSource.onmessage = e => {
+        const data = JSON.parse(e.data);
+        // do what you want
+    }
+`
 
 
 
