@@ -64,13 +64,13 @@ class WpMercure {
      * @return array
      */
     public static function getConf($file = 'configuration') {
-        $conf = include __DIR__ . '/config/' . $file . '.php';
+        $conf = file_get_contents(__DIR__ . '/config/' . $file . '.json');
         switch ($file) {
             case 'configuration':
                 if (self::$configurations) {
                     return self::$configurations;
                 } else {
-                    self::$configurations = $conf;
+                    self::$configurations = json_decode($conf, true);
                 }
                 break;
 
@@ -78,15 +78,15 @@ class WpMercure {
                 if (self::$featuresConfig) {
                     return self::$featuresConfig;
                 } else {
-                    self::$featuresConfig = $conf;
+                    self::$featuresConfig = json_decode($conf, true);
                 }
                 break;
         }
-        return $conf;
+        return json_decode($conf, true);
     }
 
     public static function saveConfig(string $fileName, array $config) {
-        return file_put_contents(__DIR__ . '/config/' . $fileName . '.php', "<?php \n return " . var_export($config, true) . ';');
+        return file_put_contents(__DIR__ . '/config/' . $fileName . '.json', json_encode($config));
     }
 
     /**
@@ -134,6 +134,10 @@ class WpMercure {
             'selector' => '',
         ];
         WpMercure::sendMessage(get_permalink($postID), json_encode($data));
+    }
+
+    public static function getPluginUrl($path) {
+        return plugin_dir_url(__FILE__) . $path;
     }
 
     public static function loadLangFile() {

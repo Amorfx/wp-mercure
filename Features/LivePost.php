@@ -47,7 +47,7 @@ class LivePost extends AbstractFeature {
         global $post;
         $config = WpMercure::getConf();
         $configFeatures = WpMercure::getConf('features');
-        wp_register_script( 'wpmercure_live-post-subscribe', plugins_url() . '/wp-mercure/assets/js/features/live-post/subscribes.js', array(), '1.0.0', true );
+        wp_register_script( 'wpmercure_live-post-subscribe', WpMercure::getPluginUrl('/assets/js/features/live-post/subscribes.js'), array(), '1.0.0', true );
         wp_localize_script( 'wpmercure_live-post-subscribe', 'wpmercure', ['HUB_PUBLIC_URL' => $config['HUB_PUBLIC_URL'], 'SELECTOR_LIVE_POST' => $configFeatures['SELECTOR_LIVE_POST'], 'POST_URL' => get_permalink($post)] );
         wp_enqueue_script('wpmercure_live-post-subscribe');
     }

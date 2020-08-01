@@ -44,18 +44,18 @@ class WpMercureAdmin {
         if (array_key_exists('page', $_POST) && wp_verify_nonce($_POST['_wpnonce'], 'wpmercure-admin')) {
             $hubUrl = '';
             if (!empty($_POST['hub-url-back'])) {
-                $hubUrl = htmlentities($_POST['hub-url-back']);
+                $hubUrl = wp_kses_post($_POST['hub-url-back']);
             }
 
             if (!empty($_POST['hub-url-front'])) {
-                $hubFront = htmlentities($_POST['hub-url-front']);
+                $hubFront = wp_kses_post($_POST['hub-url-front']);
             } else {
                 $hubFront = $hubUrl;
             }
 
             $jwt = '';
             if (!empty($_POST['jwt-token'])) {
-                $jwt = htmlentities($_POST['jwt-token']);
+                $jwt = wp_kses_post($_POST['jwt-token']);
             }
 
             // save conf
