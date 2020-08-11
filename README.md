@@ -41,4 +41,5 @@ After that use EventSource to listen events
 
 ## Credits
 - Use [Mercure](https://mercure.rocks/) protocol
+
 Created by [Clément Décou](https://www.clement-decou.fr).
