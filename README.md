@@ -1,7 +1,7 @@
 # WP Mercure
 **WordPress integration of Mercure protocol.**
 
-Source of the [WP Mercure plugin]() for WordPress.
+Source of the [WP Mercure plugin](https://wordpress.org/plugins/wp-mercure/) for WordPress.
 
 ## Install
 - Install Mercure in your server and start it (see [Install section for Mercure](https://mercure.rocks/docs/hub/install))
